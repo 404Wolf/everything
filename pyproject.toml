@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "dothething"
+name = "everything"
 version = "0.1.0"
 description = "from everything import anything"
 authors = ["Wolf Mermelstein <wolfmermelstein@gmail.com>"]
