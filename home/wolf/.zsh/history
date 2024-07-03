@@ -1,0 +1,29 @@
+: 1720041578:0;cd src
+: 1720040433:0;ls /home/wolf/Documents/projects/dopy/
+: 1720040459:1;poetry run main
+: 1720040485:1;poetry run main | grep make
+: 1720041455:1;poetry run main
+: 1720041565:0;python3 example.py
+: 1720044064:0;git add --a
+: 1720044070:0;git commit -m "Initial working version"
+: 1720044075:0;rm -r .history
+: 1720044077:0;ls
+: 1720044081:0;git add --a
+: 1720044083:0;git commit -m "Remove jank"
+: 1720044084:0;git push
+: 1720044085:0;clear
+: 1720044087:0;git push
+: 1720044091:0;git push --set-upstream origin main
+: 1720044104:0;git remote set-url git@github.com:404wolf/dopy
+: 1720044108:0;git remote set-url origin git@github.com:404wolf/dopy
+: 1720044110:0;git push --set-upstream origin main
+: 1720044129:0;rm -r .git
+: 1720044134:0;sudo rm -r .git
+: 1720044139:0;git init
+: 1720044140:0;git add --a
+: 1720044144:0;git commit -m "Initial commit"
+: 1720044156:0;sudo rm -r .git
+: 1720044157:0;fg
+: 1720044194:0;nvim .gitignore
+: 1720044207:0;git init
+: 1720044208:0;git add --a
