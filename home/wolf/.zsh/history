@@ -27,3 +27,9 @@
 : 1720044194:0;nvim .gitignore
 : 1720044207:0;git init
 : 1720044208:0;git add --a
+: 1720044210:0;git commit -m "Initial commit"
+: 1720044225:0;git remote add origin git@github.com:404wolf/dopy
+: 1720044226:0;git push --set-upstream origin main
+: 1720044242:0;fg
+: 1720044244:0;nvim .
+: 1720044356:0;git add --a
