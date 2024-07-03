@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "dopy"
+name = "dothething"
 version = "0.1.0"
-description = "This is a Python3 project"
+description = "from everything import anything"
 authors = ["Wolf Mermelstein <wolfmermelstein@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 
-packages = [ { include = "dopy", from = "src" } ]
+packages = [ { include = "everything", from = "src" } ]
 
 [tool.poetry.dependencies]
 python = "^3.11"

@@ -1,3 +1,7 @@
-from dopy import greet_person_with_name_x_with_print
+from everything import sort_list, stylized_greeting
 
-greet_person_with_name_x_with_print("Wolf")
+# Print a greeting for Joe
+print(stylized_greeting("Joe", "Angry"))
+
+# Sort a list
+print(sort_list([3, 2, 1, 0, -5, 2.5]))

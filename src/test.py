@@ -1,6 +1,10 @@
 import logging
 logging.basicConfig(level=logging.DEBUG)
 
-from dopy import greet_person_with_name_x
+from everything import stylized_greeting, sort_list
 
-print(greet_person_with_name_x("Wolf"))
+# Print a greeting for Joe
+print(stylized_greeting("Joe", "Angry"))
+
+# Sort a list
+print(sort_list([3, 2, 1, 0, -5, 2.5]))
