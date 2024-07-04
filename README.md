@@ -29,7 +29,7 @@ When you `import <anything> from everything`, `dothething` will use Python's [AS
 
 ### How to use
 
-First, set the `OPENAI_API_TOKEN` to a valid API token. Then install the package with `pip install dothething`. Finally, import anything from everything!
+First, set the `OPENAI_API_TOKEN` to a valid API token. Then install the package with `pip install dothething`. Finally, import anything from everything!
 
 ### Words of caution
 
