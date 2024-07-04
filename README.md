@@ -23,7 +23,7 @@ WHAT DO YOU WANT, WOLF?!
 
 ### How's it work?
 
-Using [OpenAI's](https://openai.com)'s state-of-the-art AI technology, we can literally import anything from everything! Any function you can imagine, dynamically generated at runtime, acceptable with a simple import. 
+Using [OpenAI's](https://openai.com)'s state-of-the-art AI technology, we can literally import anything from everything! Any function you can imagine, dynamically generated at runtime, accessible with a simple import. 
 
 When you `import <anything> from everything`, `dothething` will use Python's [AST](https://docs.python.org/3/library/ast.html) library to scan your source code, and find all usages of `<anything>`. It then will merge a few lines of context on both sides of every function call, along with the call itself. Then, it will use OpenAI's `gpt-4o` model to generate a Python function, which you can then use in your code.
 
