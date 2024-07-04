@@ -7,7 +7,7 @@ Real example:
 ```py
 from everything import sort_list, stylized_greeting
 
-# Print a greeting for Joe
+# Print a greeting for Wolf
 print(stylized_greeting("Wolf", "Angry"))
 
 # Sort a list
