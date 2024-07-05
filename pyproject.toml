@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "everything"
-version = "0.1.0"
+name = "dothething"
+version = "0.1.1"
 description = "from everything import anything"
 authors = ["Wolf Mermelstein <wolfmermelstein@gmail.com>"]
 license = "MIT"
@@ -8,10 +8,16 @@ readme = "README.md"
 
 packages = [ { include = "everything", from = "src" } ]
 
+[tool.poetry.scripts] 
+everything = "everything.__main__:cli"
+
 [tool.poetry.dependencies]
 python = "^3.11"
 openai = "^1.35.9"
 typing-extensions = "^4.12.2"
+click = "^8.1.7"
+black = "^24.4.2"
+pylint = "^3.2.5"
 
 [tool.poetry.dev-dependencies]
 black = "^24.00"
@@ -19,3 +25,4 @@ black = "^24.00"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
