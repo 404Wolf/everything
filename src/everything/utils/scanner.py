@@ -4,8 +4,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from functools import wraps
 
-__all__ = ["walk_directory"]
-
 
 def keep_visiting(method):
     @wraps(method)
@@ -49,7 +47,7 @@ class ModuleFunctionReferenceFinder(ast.NodeVisitor):
     def __init__(self, module: str, traversal_file: TraversalFile) -> None:
         self.module: str = module
         self.traversal_file: TraversalFile = traversal_file
-        self.imported_functions: set[ReferencedFunction]  = set()
+        self.imported_functions: set[ReferencedFunction] = set()
         self.function_references: set[ReferencedFunction] = set()
         self._possible_references = set()
 
@@ -91,18 +89,92 @@ class ModuleFunctionReferenceFinder(ast.NodeVisitor):
     @keep_visiting
     def visit_Attribute(self, node):
         # Find all the attributes of `self.module` that are accessd. For example,
-        # if `self.module` is "everything", we would catch everything.example, 
+        # if `self.module` is "everything", we would catch everything.example,
         # everything.another_example(), foo.bar.everything.example(), etc.
         if isinstance(node.value, ast.Name) and node.value.id == self.module:
             self.function_references.add(ReferencedFunction(node.attr, node))
 
 
-def walk_directory(root_path: Path):
+def get_module_function_usages(
+    root_path: Path, module: str
+) -> Generator[tuple[ReferencedFunction, TraversalFile], None, None]:
     for file_path in root_path.rglob("*.py"):
         traversal_file = TraversalFile(file_path)
-        reference_finder = ModuleFunctionReferenceFinder("everything", traversal_file)
-        function_references = reference_finder.find_references()
-        for function_reference in function_references:
-            print(
-                f"Found reference to {function_reference.name} on line {function_reference.line_number} in {file_path}"
-            )
+        reference_finder = ModuleFunctionReferenceFinder(module, traversal_file)
+        for reference in reference_finder.find_references():
+            yield (reference, traversal_file)
+
+
+def get_module_functions(root_path: Path, module: str) -> set[str]:
+    """
+    Get the names of all functions that are imported and used from some module.
+
+    Args:
+        module: The module to look for imports from.
+        root_path: The root path of the code directory.
+
+    Returns:
+        A set of all the functions that are imported and used from the module
+    """
+    module_function_usages = tuple(get_module_function_usages(root_path, module))
+    module_functions: set[str] = set()
+    for module_function_usage, _ in module_function_usages:
+        module_functions.add(module_function_usage.name)
+    return module_functions
+
+
+def get_module_function_contexts(
+    root_path: Path, module: str
+) -> dict[str, list[tuple[TraversalFile, int]]]:
+    """
+    Get the places of all functions that are imported and used from a given module.
+
+    First finds all imports of a given module, then finds all usages of those imports.
+
+    Args:
+        module: The module to look for imports from.
+        root_path: The root path of the code directory.
+
+    Returns:
+        A dictionary of all the functions that are imported and used from the module
+        along with their line numbers and the file they were found in.
+    """
+    module_functions = {
+        function: [] for function in get_module_functions(root_path, module)
+    }
+
+    for module_function_usage, traversal_file in get_module_function_usages(
+        root_path, module
+    ):
+        module_functions[module_function_usage.name].append(
+            (traversal_file, module_function_usage.line_number)
+        )
+
+    return module_functions
+
+
+def build_context_strings(root_path: Path, module: str, radius: int = 4) -> dict[str, str]:
+    """
+    Create a large string that contains all the example usages of a given function.
+
+    This is used to create a string to feed to an LLM.
+
+    Args:
+        module: The module to look for imports from.
+        root_path: The root path of the code directory.
+        radius: The number of lines to include before and after the function call.
+
+    Returns:
+        A string that contains all the example usages of a given function.
+    """
+    context_strings = {}
+    contexts = get_module_function_contexts(root_path, module)
+    for function_name, contexts in contexts.items():
+        function_context_string = f"EXAMPLE OF FUNCTION USE:\n"
+        for context_file, context_line in contexts:
+            context_source = context_file.get_context(context_line, radius)
+            function_context_string += "```py\n"
+            function_context_string += context_source
+            function_context_string += "\n```\n"
+        context_strings[function_name] = function_context_string
+    return context_strings

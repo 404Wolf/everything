@@ -1,25 +1,16 @@
-everything = 5
-
-from time import sleep, time
-from some_package_that_exports_everything import everything as most_things
-import some_package_that_has_everything
-from everything import export_from_everything_1, unused_export_from_everything
 import everything
+from everything import sort_list
 
-# everything
+print(everything.sort_list_discending([12, 5, 6, 3, 22]))
+print(sort_list([12, 5, 6, 3, 22]))
 
-sleep(2)
-time()
 
-some_package_that_has_everything.everything
-some_package_that_has_everything.everything()
+def adder(a, b):
+    return a + b
 
-everything
 
-export_from_everything_1
-export_from_everything_1()
+# Makes a function that changes a function to do a factorial afterwards
+new_func = everything.factorialize_after(adder)
+print(new_func(3, 4))
 
-everything.export_from_everything2
-everything.export_from_everything2()
-
-time.everything.this_is_not_an_everything_export()
+print(everything.greet_people_with_different_tones(["bob", "joe", "sally"]))

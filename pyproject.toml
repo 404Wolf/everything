@@ -9,13 +9,15 @@ readme = "README.md"
 packages = [ { include = "everything", from = "src" } ]
 
 [tool.poetry.scripts] 
-everything = "everything.__main__:main"
+everything = "everything.__main__:cli"
 
 [tool.poetry.dependencies]
 python = "^3.11"
 openai = "^1.35.9"
 typing-extensions = "^4.12.2"
 click = "^8.1.7"
+black = "^24.4.2"
+pylint = "^3.2.5"
 
 [tool.poetry.dev-dependencies]
 black = "^24.00"
