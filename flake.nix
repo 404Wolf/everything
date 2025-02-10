@@ -1,5 +1,5 @@
 {
-  description = "This is a Python3 project";
+  description = "Literally Everything, .PY";
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
@@ -10,29 +10,25 @@
     };
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      flake-utils,
-      poetry2nix,
-    }:
+  outputs = {
+    self,
+    nixpkgs,
+    flake-utils,
+    poetry2nix,
+  }:
     flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        name = "dopy";
-        pkgs = import nixpkgs { inherit system; };
-        inherit (poetry2nix.lib.mkPoetry2Nix { inherit pkgs; }) mkPoetryApplication;
-      in
-      rec {
+      system: let
+        pkgs = import nixpkgs {inherit system;};
+        inherit (poetry2nix.lib.mkPoetry2Nix {inherit pkgs;}) mkPoetryApplication;
+      in rec {
         packages = {
-          default = mkPoetryApplication { projectDir = self; };
+          default = mkPoetryApplication {projectDir = self;};
         };
 
         devShells = {
           default = pkgs.mkShell {
-            buildInputs = [ pkgs.poetry ];
-            inputsFrom = [ packages.default ];
+            buildInputs = [pkgs.poetry];
+            inputsFrom = [packages.default];
           };
           poetry = pkgs.mkShell {
             packages = [
