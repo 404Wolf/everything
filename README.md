@@ -29,9 +29,9 @@ When you `import <anything> from everything`, `dothething` will use Python's [AS
 
 ### How to use
 
-First, set the `OPENAI_API_TOKEN` to a valid API token. Then install the package with `pip install dothething`. Finally, import anything from everything!
+First, set the `OPENAI_API_TOKEN` to a valid API token. Then install the package with [`pip install everything`](https://pypi.org/project/everything/). Finally, import anything from everything!
 
 ### Words of caution
 
-You **probably** don't want to use this in production. `dothething` provides no guarantees! This is my escape hatch after of 6 weeks of learning `nix`.
+You **probably** don't want to use this in production. `everything` provides no guarantees! This is my escape hatch after of 6 weeks of learning `nix`.
 
