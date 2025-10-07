@@ -1,28 +1,33 @@
-[tool.poetry]
+[project]
 name = "dothething"
 version = "0.1.1"
 description = "from everything import anything"
-authors = ["Wolf Mermelstein <wolfmermelstein@gmail.com>"]
-license = "MIT"
+authors = [{ name = "Wolf Mermelstein", email = "wolfmermelstein@gmail.com" }]
+license = { text = "MIT" }
 readme = "README.md"
+requires-python = ">=3.11"
 
-packages = [ { include = "everything", from = "src" } ]
+dependencies = [
+    "openai>=1.35.9",
+    "typing-extensions>=4.12.2",
+    "click>=8.1.7",
+    "black>=24.4.2",
+    "pylint>=3.2.5",
+]
 
-[tool.poetry.scripts] 
+[project.optional-dependencies]
+dev = [
+    "black>=24.0.0",
+]
+
+[project.scripts]
 everything = "everything.__main__:cli"
 
-[tool.poetry.dependencies]
-python = "^3.11"
-openai = "^1.35.9"
-typing-extensions = "^4.12.2"
-click = "^8.1.7"
-black = "^24.4.2"
-pylint = "^3.2.5"
-
-[tool.poetry.dev-dependencies]
-black = "^24.00"
+[tool.uv]
+# optional but recommended if your code lives under src/
+src = ["src"]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
 
