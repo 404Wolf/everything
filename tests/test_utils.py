@@ -1,6 +1,6 @@
 from everything.utils.misc import (
     extract_from_codeblock_if_in_codeblock,
-    str_function_to_real_function,
+    str_function_to_real_function,  # pyright: ignore[reportUnknownVariableType]
     extract_inner_content_from_function,
 )
 
@@ -23,7 +23,9 @@ def bar(x, y):
 def test_str_function_to_real_function():
     code = """def add(a, b):
     return a + b"""
-    func = str_function_to_real_function(code)
+    func = str_function_to_real_function(
+        code
+    )  # pyright: ignore[reportUnknownVariableType]
     assert func(2, 3) == 5
     assert func(10, -5) == 5
 

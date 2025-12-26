@@ -18,7 +18,9 @@ EVERYTHING_HISTORY = int(os.getenv("HISTORY", "10"))
 
 
 def runtime_generate_function(
-    name: str, context_radius: int = EVERYTHING_CONTEXT_RADIUS, history: int = EVERYTHING_HISTORY
+    name: str,
+    context_radius: int = EVERYTHING_CONTEXT_RADIUS,
+    history: int = EVERYTHING_HISTORY,
 ) -> Callable:
     import __main__ as main
 

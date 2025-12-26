@@ -172,8 +172,11 @@ def build_context_strings(
     context_strings = {}
     contexts = get_module_function_contexts(root_path, module)
     for function_name, contexts in contexts.items():
+        sorted_contexts = sorted(
+            contexts, key=lambda x: x[0].path.name
+        )  # for test consistency
         function_context_string = "# Example Usage:\n"
-        for context_file, context_line in contexts:
+        for context_file, context_line in sorted_contexts:
             context_source = context_file.get_context(context_line, radius)
             relative_path = context_file.path.name
             function_context_string += f"```py ({relative_path}:{context_line})\n"

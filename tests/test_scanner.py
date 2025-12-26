@@ -13,7 +13,7 @@ def test_build_context_strings():
         tmp_path = Path(tmp_path)
 
         file1 = tmp_path / "test1.py"
-        file1.write_text(
+        _ = file1.write_text(
             """from everything import foo
 x = 1
 foo()
@@ -22,7 +22,7 @@ y = 2
         )
 
         file2 = tmp_path / "test2.py"
-        file2.write_text(
+        _ = file2.write_text(
             """from everything import foo, bar
 a = 1
 foo(123)
