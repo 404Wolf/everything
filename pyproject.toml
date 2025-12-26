@@ -1,6 +1,6 @@
 [project]
 name = "everything"
-version = "0.1.5"
+version = "0.1.7"
 description = "from everything import anything"
 authors = [{ name = "Wolf Mermelstein", email = "wolf@404wolf.com" }]
 license = { text = "MIT" }
