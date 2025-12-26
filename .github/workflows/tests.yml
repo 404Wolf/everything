@@ -1,0 +1,28 @@
+name: Tests
+
+on:
+  push:
+    branches: ["*"]
+  pull_request:
+    branches: ["*"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v7
+
+    - name: Set up Python
+      uses: actions/setup-python@v6
+      with:
+        python-version-file: "pyproject.toml"
+
+    - name: Install just
+      uses: extractions/setup-just@v2
+
+    - name: Run tests
+      run: just test
