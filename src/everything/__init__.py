@@ -10,9 +10,9 @@ __email__ = "wolf@404wolf.com"
 
 
 load_dotenv()
-from everything.generator import (
+from everything.generator import (  # noqa: E402
     runtime_generate_function,
-)  # noqa: E402 (need env var set to import)
+)  #(need env var set to import)
 
 # Setup logger if env var set
 if os.getenv("EVERYTHING_DEBUG", "0") == "1":

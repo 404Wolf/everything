@@ -1,3 +1,4 @@
+from functools import cache
 import logging
 import os
 import re
@@ -13,7 +14,7 @@ from .misc import (
 
 _LOGGER = logging.getLogger(__name__)
 
-ANTHROPIC_MODEL = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-4-5")
+ANTHROPIC_MODEL = os.environ.get("ANTHROPIC_MODEL", "claude-haiku-4-5")
 ANTHROPIC_MAX_TOKENS = int(os.environ.get("ANTHROPIC_MAX_TOKENS", "4096"))
 client = Anthropic()  # uses ANTHROPIC_API_KEY by default
 
@@ -26,6 +27,7 @@ class FunctionGenerateFailure(Exception):
     pass
 
 
+@cache
 def generate_function(name: str, context: str, source: bool = False) -> Callable | str:
     """
     Generate a function based on a given context.

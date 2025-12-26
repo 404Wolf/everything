@@ -13,9 +13,12 @@ from everything.utils.scanner import build_context_strings
 
 _LOGGER = logging.getLogger(__name__)
 
+EVERYTHING_CONTEXT_RADIUS = int(os.getenv("CONTEXT_RADIUS", "4"))
+EVERYTHING_HISTORY = int(os.getenv("HISTORY", "10"))
+
 
 def runtime_generate_function(
-    name: str, context_radius: int = 4, history: int = 10
+    name: str, context_radius: int = EVERYTHING_CONTEXT_RADIUS, history: int = EVERYTHING_HISTORY
 ) -> Callable:
     import __main__ as main
 
