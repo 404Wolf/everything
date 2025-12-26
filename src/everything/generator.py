@@ -1,20 +1,22 @@
 import logging
-from typing import Callable
 import os
 import readline
 import sys
 from pathlib import Path
+from typing import Callable
 
 import black
 import click
 
-from everything.utils.openai import generate_function
+from everything.utils.magic import generate_function
 from everything.utils.scanner import build_context_strings
 
 _LOGGER = logging.getLogger(__name__)
 
 
-def runtime_generate_function(name, context_radius=4, history=10) -> Callable:
+def runtime_generate_function(
+    name: str, context_radius: int = 4, history: int = 10
+) -> Callable:
     import __main__ as main
 
     if not hasattr(main, "__file__"):
@@ -27,7 +29,9 @@ def runtime_generate_function(name, context_radius=4, history=10) -> Callable:
         source_path = Path(os.path.dirname(os.path.abspath(sys.argv[0])))
         context_string = build_context_strings(source_path, name, context_radius)[name]
 
-    return generate_function(name, context_string)  # pyright: ignore
+    return generate_function(
+        name, context_string
+    )  # pyright: ignore (impossible to type check)
 
 
 def build_onefile_module(root_path: Path, module: str, **kwargs) -> str:

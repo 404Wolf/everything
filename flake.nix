@@ -1,5 +1,5 @@
 {
-  description = "Literally Everything, .PY";
+  description = "Literally everything in Python";
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
@@ -8,9 +8,9 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       flake-utils,
+      ...
     }:
     flake-utils.lib.eachDefaultSystem (
       system:
@@ -20,6 +20,13 @@
       {
         devShells = {
           default = pkgs.mkShell {
+            UV_VENV_CLEAR="1";
+            EVERYTHING_DEBUG="1";
+            shellHook = ''
+              uv venv
+              source .venv/bin/activate
+              uv pip install -e .
+            '';
             packages = with pkgs; [
               python313
               ruff

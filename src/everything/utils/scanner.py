@@ -153,7 +153,9 @@ def get_module_function_contexts(
     return module_functions
 
 
-def build_context_strings(root_path: Path, module: str, radius: int = 4) -> dict[str, str]:
+def build_context_strings(
+    root_path: Path, module: str, radius: int = 4
+) -> dict[str, str]:
     """
     Create a large string that contains all the example usages of a given function.
 
@@ -170,10 +172,11 @@ def build_context_strings(root_path: Path, module: str, radius: int = 4) -> dict
     context_strings = {}
     contexts = get_module_function_contexts(root_path, module)
     for function_name, contexts in contexts.items():
-        function_context_string = "EXAMPLE OF FUNCTION USE:\n"
+        function_context_string = "# Example Usage:\n"
         for context_file, context_line in contexts:
             context_source = context_file.get_context(context_line, radius)
-            function_context_string += "```py\n"
+            relative_path = context_file.path.name
+            function_context_string += f"```py ({relative_path}:{context_line})\n"
             function_context_string += context_source
             function_context_string += "\n```\n"
         context_strings[function_name] = function_context_string

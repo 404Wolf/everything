@@ -1,12 +1,30 @@
-"""Top-level package for DoPy."""
+"""Top-level package for everything.py."""
+
+import os
+import logging
+from typing import Callable
+from dotenv import load_dotenv
 
 __author__ = """Wolf Mermelstein"""
-__email__ = "wolfmermelstein@gmail.com"
-__version__ = "0.1.0"
+__email__ = "wolf@404wolf.com"
 
 
-from typing import Callable
-from everything.generator import runtime_generate_function
+load_dotenv()
+from everything.generator import (
+    runtime_generate_function,
+)  # noqa: E402 (need env var set to import)
+
+# Setup logger if env var set
+if os.getenv("EVERYTHING_DEBUG", "0") == "1":
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.DEBUG)
+    handler = logging.StreamHandler()
+    handler.setLevel(logging.DEBUG)
+    handler.setFormatter(
+        logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+    )
+    logger.addHandler(handler)
+    logger.debug("Debug logging enabled for everything.py")
 
 
 def __getattr__(name: str) -> Callable:

@@ -1,33 +1,31 @@
 [project]
-name = "dothething"
+name = "everything"
 version = "0.1.1"
 description = "from everything import anything"
-authors = [{ name = "Wolf Mermelstein", email = "wolfmermelstein@gmail.com" }]
+authors = [{ name = "Wolf Mermelstein", email = "wolf@404wolf.com" }]
 license = { text = "MIT" }
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.09"
 
 dependencies = [
     "openai>=1.35.9",
     "typing-extensions>=4.12.2",
-    "click>=8.1.7",
     "black>=24.4.2",
     "pylint>=3.2.5",
+    "python-dotenv",
+    "anthropic>=0.75.0",
 ]
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
+    "inline-snapshot>=0.31.1",
     "black>=24.0.0",
+    "pytest>=8.0.0",
 ]
-
-[project.scripts]
-everything = "everything.__main__:cli"
-
-[tool.uv]
-# optional but recommended if your code lives under src/
-src = ["src"]
 
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
+requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools.packages.find]
+where = ["src"]
