@@ -15,7 +15,7 @@ print(sort_list([3, 2, 1, 0, -5, 2.5]))
 ```
 
 ```cmd
->> OPENAI_API_TOKEN=...
+>> ANTHROPIC_API_KEY=...
 >> python example.py
 WHAT DO YOU WANT, WOLF?!
 [-5, 0, 1, 2, 2.5, 3]
@@ -23,13 +23,13 @@ WHAT DO YOU WANT, WOLF?!
 
 ### How's it work?
 
-Using [OpenAI's](https://openai.com)'s state-of-the-art AI technology, we can literally import anything from everything! Any function you can imagine, dynamically generated at runtime, accessible with a simple import. 
+Using state-of-the-art technology, we can literally import anything from everything! Any function you can imagine, dynamically generated at runtime, accessible with a simple import. 
 
-When you `import <anything> from everything`, `everything` will use Python's [AST](https://docs.python.org/3/library/ast.html) library to scan your source code, and find all usages of `<anything>`. It then will merge a few lines of context on both sides of every function call, along with the call itself. Then, it will use OpenAI's `gpt-4o` model to generate a Python function, which you can then use in your code.
+When you `import <anything> from everything`, `everything` will use Python's [AST](https://docs.python.org/3/library/ast.html) library to scan your source code, and find all usages of `<anything>`. It then will merge a few lines of context on both sides of every function call, along with the call itself. Then, it will have claude generate a Python function, freshly plopped into your code at runtime.
 
 ### How to use
 
-First, set the `OPENAI_API_TOKEN` to a valid API token. Then install the package with [`pip install everything`](https://pypi.org/project/everything/). Finally, import anything from everything!
+First, set the `ANTHROPIC_API_KEY` to a valid API token. Then install the package with [`pip install everything`](https://pypi.org/project/everything/) (or `uv`, etc). Finally, `import anything from everything`!
 
 ### Words of caution
 
